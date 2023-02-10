@@ -1,4 +1,5 @@
 local tool = Instance.new("Tool",game.Players.LocalPlayer.Backpack)
+tool.RequiresHandle = false
 tool.Name = "DEATH BEAM"
 
 local remoteEvent = workspace.resources.RemoteEvent
@@ -53,31 +54,26 @@ local rainbowColors = {
 	Color3.fromRGB(128,0,255)
 }
 local mouse = game:GetService("Players").LocalPlayer:GetMouse()
-local uis = game:GetService("UserInputService")
-uis.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 then
-		if tool.Parent == game:GetService("Players").LocalPlayer.Character then
-			local target = mouse.Hit.Position
-			local size = Vector3.new(400,40,40)
-			local posOffset = Vector3.new()
-			for i = 1,20 do
-				task.wait()
-				size += Vector3.new(0,-2,-2)
-				local newLaser = createPart(nil,nil,{
-						CFrame = CFrame.new(target) * CFrame.new(0,100,0) * CFrame.Angles(0,0,math.rad(90)),
-						Color = --[[rainbowColors[math.random(1,#rainbowColors)]--]]Color3.fromRGB(0,0,0),
-						Material=Enum.Material.Neon,
-						Size = size,
-						Shape = "Cylinder",
-						CanCollide = true,
-						RotVelocity=Vector3.new(10000,10000,10000)
-					})
-				for i,v in pairs(workspace:GetPartsInPart(newLaser)) do
-					if v.Parent:FindFirstChildOfClass("Humanoid") then
-						local pos1 = v.Position + Vector3.new(0,10,0)
-						dealDamage(v.Parent,"AK47",pos1,v.Position)
-					end
-				end
+tool.Activated:Connect(function()
+	local target = mouse.Hit.Position
+	local size = Vector3.new(400,40,40)
+	local posOffset = Vector3.new()
+	for i = 1,20 do
+		task.wait()
+		size += Vector3.new(0,-2,-2)
+		local newLaser = createPart(nil,nil,{
+			CFrame = CFrame.new(target) * CFrame.new(0,100,0) * CFrame.Angles(0,0,math.rad(90)),
+			Color = --[[rainbowColors[math.random(1,#rainbowColors)]--]]Color3.fromRGB(0,0,0),
+			Material=Enum.Material.Neon,
+			Size = size,
+			Shape = "Cylinder",
+			CanCollide = true,
+			RotVelocity=Vector3.new(10000,10000,10000)
+		})
+		for i,v in pairs(workspace:GetPartsInPart(newLaser)) do
+			if v.Parent:FindFirstChildOfClass("Humanoid") then
+				local pos1 = v.Position + Vector3.new(0,10,0)
+				dealDamage(v.Parent,"AK47",pos1,v.Position)
 			end
 		end
 	end
