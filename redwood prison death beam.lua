@@ -1,3 +1,5 @@
+-- silas_4008
+
 local tool = Instance.new("Tool",game.Players.LocalPlayer.Backpack)
 tool.RequiresHandle = false
 tool.Name = "DEATH BEAM"
