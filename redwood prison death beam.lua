@@ -58,12 +58,12 @@ tool.Activated:Connect(function()
 	local target = mouse.Hit.Position
 	local size = Vector3.new(400,40,40)
 	local posOffset = Vector3.new()
-	for i = 1,10 do
+	for i = 1,20 do
 		task.wait()
-		size += Vector3.new(0,-4,-4)
+		size += Vector3.new(0,-2,-2)
 		local newLaser = createPart(nil,nil,{
 			CFrame = CFrame.new(target) * CFrame.new(0,100,0) * CFrame.Angles(0,0,math.rad(90)),
-			Color = --[[rainbowColors[math.random(1,#rainbowColors)]--]]Color3.fromRGB(255,0,0),
+			Color = --[[rainbowColors[math.random(1,#rainbowColors)]--]]BrickColor.new("Bright blue").Color,
 			Material=Enum.Material.Neon,
 			Size = size,
 			Shape = "Cylinder",
