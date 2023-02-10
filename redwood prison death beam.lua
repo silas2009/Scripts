@@ -30,7 +30,7 @@ function createPart(Pos1,Pos2,Props)
 	local newLaser = drawLaser(Pos1 or Vector3.new(),Pos2 or Vector3.new(),Props)
 	spawn(function()
 		while wait() do
-			newLaser.Transparency += 0.1
+			newLaser.Transparency += 0.25
 			if newLaser.Transparency >= 1 then
 				newLaser:Destroy()
 				break
