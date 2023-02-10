@@ -76,7 +76,7 @@ tool.Activated:Connect(function()
 			Material=Enum.Material.Concrete,
 			Size = explosionSize,
 			Shape = "Cylinder",
-			Velocity = Vector3.new(math.random(-250,250),500,math.random(-250,250)),
+			Velocity = Vector3.new(math.random(-500,500),1000,math.random(-500,500)),
 			CanCollide = true,
 			
 			Transparency = 0.5
