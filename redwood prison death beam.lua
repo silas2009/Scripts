@@ -47,11 +47,8 @@ function dealDamage(Character, GunType, Pos1, Pos2)
 end
 local rainbowColors = {
 	Color3.fromRGB(255,0,0),
-	Color3.fromRGB(255,128,0),
-	Color3.fromRGB(255,255,0),
 	Color3.fromRGB(0,255,0),
 	Color3.fromRGB(0,0,255),
-	Color3.fromRGB(128,0,255)
 }
 local mouse = game:GetService("Players").LocalPlayer:GetMouse()
 tool.Activated:Connect(function()
@@ -63,12 +60,13 @@ tool.Activated:Connect(function()
 		size += Vector3.new(0,-2,-2)
 		local newLaser = createPart(nil,nil,{
 			CFrame = CFrame.new(target) * CFrame.new(0,100,0) * CFrame.Angles(0,0,math.rad(90)),
-			Color = --[[rainbowColors[math.random(1,#rainbowColors)]--]]BrickColor.new("Bright blue").Color,
+			Color = rainbowColors[math.random(1,#rainbowColors)],
 			Material=Enum.Material.Neon,
 			Size = size,
 			Shape = "Cylinder",
 			CanCollide = true,
-			RotVelocity=Vector3.new(10000,10000,10000)
+			RotVelocity=Vector3.new(10000,10000,10000),
+			Transparency = 0.5
 		})
 		for i,v in pairs(workspace:GetPartsInPart(newLaser)) do
 			if v.Parent:FindFirstChildOfClass("Humanoid") then
