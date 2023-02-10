@@ -45,27 +45,40 @@ end
 function dealDamage(Character, GunType, Pos1, Pos2)
 	remoteEvent:FireServer("dealBulletDamage", Character:FindFirstChildOfClass("Humanoid"), GunType, Pos1, Pos2)
 end
-local rainbowColors = {
+local colors = {
 	Color3.fromRGB(255,0,0),
 	Color3.fromRGB(0,255,0),
-	Color3.fromRGB(0,0,255),
 }
 local mouse = game:GetService("Players").LocalPlayer:GetMouse()
 tool.Activated:Connect(function()
 	local target = mouse.Hit.Position
 	local size = Vector3.new(400,40,40)
+	local explosionSize = Vector3.new(1,10,10)
 	local posOffset = Vector3.new()
 	for i = 1,20 do
 		task.wait()
 		size += Vector3.new(0,-2,-2)
+		explosionSize += Vector3.new(0,4,4)
+		local pos = target - Vector3.new(0,400,0)
 		local newLaser = createPart(nil,nil,{
-			CFrame = CFrame.new(target) * CFrame.new(0,100,0) * CFrame.Angles(0,0,math.rad(90)),
-			Color = rainbowColors[math.random(1,#rainbowColors)],
+			CFrame = CFrame.new(target + Vector3.new(0,(size.X/2) - 10,0)) * CFrame.Angles(0,0,math.rad(90)),
+			Color = colors[math.random(1,#colors)],
 			Material=Enum.Material.Neon,
 			Size = size,
 			Shape = "Cylinder",
 			CanCollide = true,
 			RotVelocity=Vector3.new(10000,10000,10000),
+			Transparency = 0.5
+		})
+		createPart(nil,nil,{
+			CFrame = CFrame.new(target) * CFrame.Angles(0,0,math.rad(90)),
+			Color = Color3.fromRGB(128,128,128),
+			Material=Enum.Material.Concrete,
+			Size = explosionSize,
+			Shape = "Cylinder",
+			Velocity = Vector3.new(math.random(-250,250),500,math.random(-250,250)),
+			CanCollide = true,
+			
 			Transparency = 0.5
 		})
 		for i,v in pairs(workspace:GetPartsInPart(newLaser)) do
