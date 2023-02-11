@@ -75,7 +75,7 @@ tool.Activated:Connect(function()
 		createPart(nil,nil,{
 			CFrame = CFrame.new(target) * CFrame.Angles(0,0,math.rad(90)),
 			Color = Color3.fromRGB(128,128,128),
-			Material=Enum.Material.Concrete,
+			Material=Enum.Material.Glass,
 			Size = explosionSize,
 			Shape = "Cylinder",
 			Velocity = Vector3.new(math.random(-500,500),1000,math.random(-500,500)),
