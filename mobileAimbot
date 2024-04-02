@@ -164,7 +164,7 @@ end)
 updateButton()
 
 game:GetService("RunService").RenderStepped:Connect(function()
-	local range = 100
+	local range = 200
 	script.Parent.Range.Size = UDim2.fromOffset(range,range)
 	if not aimbotEnabled then return end
 	local target = closestToCursor(range)
