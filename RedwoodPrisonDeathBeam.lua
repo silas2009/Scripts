@@ -23,7 +23,6 @@ function drawLaser(pos1, pos2, props)
 			laserClone[i] = v
 		end
 	end
-	laserClone.CanCollide = false
 	laserClone.Parent = workspace.ignore
 	return laserClone
 end
@@ -52,6 +51,8 @@ local colors = {
 	Color3.fromRGB(0,255,0),
 }
 local mouse = game:GetService("Players").LocalPlayer:GetMouse()
+local currentLaser
+
 tool.Activated:Connect(function()
 	local target = mouse.Hit.Position
 	local size = Vector3.new(400,40,40)
@@ -62,14 +63,15 @@ tool.Activated:Connect(function()
 		size += Vector3.new(0,-2,-2)
 		explosionSize += Vector3.new(0,4,4)
 		local pos = target - Vector3.new(0,400,0)
-		local newLaser = createPart(nil,nil,{
+		currentLaser = createPart(nil,nil,{
 			CFrame = CFrame.new(target + Vector3.new(0,(size.X/2) - 10,0)) * CFrame.Angles(0,0,math.rad(90)),
 			Color = colors[math.random(1,#colors)],
 			Material=Enum.Material.Neon,
 			Size = size,
 			Shape = "Cylinder",
 			CanCollide = true,
-			RotVelocity=Vector3.new(10000,10000,10000),
+			RotVelocity=Vector3.new(100000,100000,100000),
+			Velocity=Vector3.new(0,100000,0),
 			Transparency = 0.5
 		})
 		createPart(nil,nil,{
@@ -78,16 +80,20 @@ tool.Activated:Connect(function()
 			Material=Enum.Material.Glass,
 			Size = explosionSize,
 			Shape = "Cylinder",
-			Velocity = Vector3.new(math.random(-500,500),1000,math.random(-500,500)),
+			Velocity = Vector3.new(math.random(-500,500),100000,math.random(-500,500)),
 			CanCollide = true,
-			
+
 			Transparency = 0.5
 		})
-		for i,v in pairs(workspace:GetPartsInPart(newLaser)) do
-			if v.Parent:FindFirstChildOfClass("Humanoid") then
-				local pos1 = v.Position + Vector3.new(0,10,0)
-				dealDamage(v.Parent,"AK47",pos1,v.Position)
-			end
+	end
+end)
+
+game:GetService("RunService").RenderStepped:Connect(function()
+	if not currentLaser or not currentLaser.Parent then currentLaser = nil return end
+	for i,v in pairs(workspace:GetPartsInPart(currentLaser)) do
+		if v.Parent:FindFirstChildOfClass("Humanoid") then
+			local pos1 = v.Position + Vector3.new(0,10,0)
+			dealDamage(v.Parent,"AK47",pos1,v.Position)
 		end
 	end
 end)
