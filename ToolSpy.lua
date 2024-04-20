@@ -80,6 +80,7 @@ end
 
 function added(tool)
 	if not tool:IsA("Tool") then return end
+	if game.GameId == gameIds.BloxFruits and tool.Parent:FindFirstChildOfClass("Humanoid") then return end
 	local part = tool:FindFirstChildOfClass("Part") or tool:FindFirstChildOfClass("MeshPart") or tool:FindFirstChildOfClass("UnionOperation")
 	if not part or part:FindFirstChild("ToolSpyUI") then return end
 	local b = Instance.new("BillboardGui",part)
