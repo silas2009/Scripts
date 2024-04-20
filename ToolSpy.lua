@@ -46,6 +46,7 @@ local gameIds = {
 }
 
 function update(tool,image)
+	local showName = tool.TextureId == ""
 	if game.GameId == gameIds.BloxFruits then
 		if tool.Name:sub(#tool.Name - 5, #tool.Name) == " Fruit" then
 			local fruitName = tool.Name:sub(1, #tool.Name - 6)
@@ -60,6 +61,7 @@ function update(tool,image)
 					image.ImageRectSize = Vector2.new(150,150)
 					image.ImageRectOffset = icon.Index * 150
 				end
+				showName = false
 			end
 		else
 			image.ImageRectSize = tool:GetAttribute("ImageRectSize") or Vector2.zero
@@ -71,9 +73,9 @@ function update(tool,image)
 		image.ImageRectSize = tool:GetAttribute("ImageRectSize") or Vector2.zero
 		image.ImageRectOffset = tool:GetAttribute("ImageRectOffset") or Vector2.zero
 		image.Image = tool.TextureId
-		image.ToolName.Text = tool.Name
 	end
-	image.ToolName.Visible = tool.TextureId == ""
+	image.ToolName.Text = tool.Name
+	image.ToolName.Visible = showName
 end
 
 function added(tool)
