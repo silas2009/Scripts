@@ -66,15 +66,14 @@ function update(tool,image)
 			image.ImageRectOffset = tool:GetAttribute("ImageRectOffset") or Vector2.zero
 			image.Image = tool.TextureId
 			image.ToolName.Text = tool.Name
-			image.ToolName.Visible = tool.TextureId == ""
 		end
 	else
 		image.ImageRectSize = tool:GetAttribute("ImageRectSize") or Vector2.zero
 		image.ImageRectOffset = tool:GetAttribute("ImageRectOffset") or Vector2.zero
 		image.Image = tool.TextureId
 		image.ToolName.Text = tool.Name
-		image.ToolName.Visible = tool.TextureId == ""
 	end
+	image.ToolName.Visible = tool.TextureId == ""
 end
 
 function added(tool)
