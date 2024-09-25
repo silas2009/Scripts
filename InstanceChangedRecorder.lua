@@ -168,4 +168,4 @@ function record(length,instancesFilter)
 	return scriptSource
 end
 
-setclipboard(record(5,{game.Players.LocalPlayer.Character}))
+return record
